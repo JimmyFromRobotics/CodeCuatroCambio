@@ -1,0 +1,17 @@
+FROM ubuntu:latest
+
+RUN apt-get update -y
+RUN apt-get install -y python3-pip python3-dev build-essential
+
+RUN mkdir -p /ur/src/app
+WORKDIR /usr/src/app
+
+COPY ./flaskfolder/PhraseFindr/requirements.txt /usr/src/app
+
+RUN pip3 install -r requirements.txt
+
+COPY ./flaskfolder/PhraseFindr/ /usr/src/app/
+COPY ./flaskfolder/PhraseFindr/SwampHacks.json /usr/src/app/
+
+ENTRYPOINT ["flask"]
+CMD ["run", "--host=0.0.0.0"]

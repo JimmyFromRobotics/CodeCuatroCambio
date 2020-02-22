@@ -1,0 +1,33 @@
+version: '3.7'
+
+networks:
+  default:
+    driver: bridge
+
+services:
+  flask:
+    build:
+      context: .
+      dockerfile: flask
+    ports: 
+      - "5000:5000"
+    expose: 
+      - "5000"
+
+    environment: 
+      - FLASK_APP=/usr/src/app/app.py
+      - LC_ALL=C.UTF-8
+      - LANG=C.UTF-8
+    networks: 
+      - default
+
+  react:
+    build: 
+      context: .
+      dockerfile: react
+    expose:
+      - "3000"
+    ports:
+      - "3000:3000"
+    links:
+      - "flask:flask"
