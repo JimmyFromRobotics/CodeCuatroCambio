@@ -3,10 +3,10 @@ FROM node:latest
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
-COPY ./reactfolder/PhraseFindr/package.json /usr/src/app/
+COPY ./reactfolder/package.json /usr/src/app/
 
 RUN npm install
 
-COPY ./reactfolder/PhraseFindr/ /usr/src/app/
+COPY ./reactfolder/ /usr/src/app/
 
 CMD ["npm", "start"]
