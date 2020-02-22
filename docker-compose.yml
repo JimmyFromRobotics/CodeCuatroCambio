@@ -5,10 +5,10 @@ networks:
     driver: bridge
 
 services:
-  node:
+  flask:
     build:
       context: .
-      dockerfile: node
+      dockerfile: flask
     ports: 
       - "5000:5000"
     expose: 
@@ -30,4 +30,4 @@ services:
     ports:
       - "3000:3000"
     links:
-      - "node:node"
+      - "flask:flask"
