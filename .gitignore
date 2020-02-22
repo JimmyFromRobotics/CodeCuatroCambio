@@ -1,1 +1,3 @@
 .vscode/
+flaskfolder/__pycache__/
+/venv/

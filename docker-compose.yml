@@ -5,29 +5,55 @@ networks:
     driver: bridge
 
 services:
-  flask:
-    build:
-      context: .
-      dockerfile: flask
-    ports: 
-      - "5000:5000"
-    expose: 
-      - "5000"
+    flask:
+        build:
+            context: .
+            dockerfile: flask
+        ports: 
+            - "5000:5000"
+        expose: 
+            - "5000"
 
-    environment: 
-      - FLASK_APP=/usr/src/app/app.py
-      - LC_ALL=C.UTF-8
-      - LANG=C.UTF-8
-    networks: 
-      - default
+        environment: 
+            - FLASK_APP=/usr/src/app/app.py
+            - LC_ALL=C.UTF-8
+            - LANG=C.UTF-8
+        networks: 
+            - default
 
-  react:
-    build: 
-      context: .
-      dockerfile: react
-    expose:
-      - "3000"
-    ports:
-      - "3000:3000"
-    links:
-      - "flask:flask"
+    # react:
+    #     build: 
+    #         context: .
+    #         dockerfile: react
+    #     expose:
+    #         - "3000"
+    #     ports:
+    #         - "3000:3000"
+    #     links:
+    #         - "flask:flask"
+    #     networks: 
+    #         - default
+
+    # pgadmin:
+    #     image: dpage/pgadmin4
+    #     ports:
+    #         - "8080:8080"
+    #     networks: 
+    #         - default
+    #     links: 
+    #         - "flask:flask"
+    #         - "postgres:postgres"
+        
+    # postgres:
+    #     image: postgres
+    #     environment:
+    #         POSTGRES_USER: postgres
+    #         POSTGRES_PASSWORD: postgres
+    #     ports: 
+    #         - "5432:5432"
+    #     networks: 
+    #         - default
+    #     links: 
+    #         - "pgadmin:pgadmin"
+    #     volumes: 
+    #         - ./db:/var/lib/postgresql/data
