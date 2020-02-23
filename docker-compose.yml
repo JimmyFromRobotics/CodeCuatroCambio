@@ -21,20 +21,32 @@ services:
         networks: 
             - default
 
-    # react:
-    #     build: 
-    #         context: .
-    #         dockerfile: react
-    #     expose:
-    #         - "3000"
-    #         - "3001"
-    #     ports:
-    #         - "3000:3000"
-    #         - "3001:3001" # production
-    #     links:
-    #         - "flask:flask"
-    #     networks: 
-    #         - default
+# production
+    react:
+        build: 
+            context: .
+            dockerfile: react
+        expose:
+            - "3001"
+        ports:
+            - "3001:3001" # production
+        links:
+            - "flask:flask"
+        networks: 
+            - default
+
+    react2:
+        build: 
+            context: .
+            dockerfile: react2
+        expose:
+            - "3000"
+        ports:
+            - "3000:3000"
+        links:
+            - "flask:flask"
+        networks: 
+            - default
 
     mongo:
         image: mongo

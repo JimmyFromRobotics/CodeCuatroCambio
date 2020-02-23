@@ -36,6 +36,7 @@ if joblistings.count() == 0:
     ]
 
     myInsert = joblistings.insert_many(jobs)
+    myclient.close()
 
 @app.route('/retrieve', methods = ['GET'])
 def retrieve():
@@ -51,6 +52,7 @@ def get_json():
     myInsert = joblistings.insert_one(text)
     return jsonify({
         "status":"done"
+        "insertedData": myInsert
     }), 200
 
     #  main
