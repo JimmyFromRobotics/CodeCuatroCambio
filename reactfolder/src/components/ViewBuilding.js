@@ -1,22 +1,23 @@
 import React from 'react';
 
 const ViewBuilding = (props) => {
-    let a="name: ";
-    let b="id: ";
-    let c="code: ";
-    let d="";
-    let e="latitude: ";
-    let f="longitude: ";
+    let a="title: ";
+    let b="description: ";
+    let c="location: ";
+    let d="wage: ";
+    let e="requirements: ";
+    let f="";
     let g="";
     if(props.dataOne!=null){
-    a=a+props.dataOne.name+"                     ";
-    b=b+props.dataOne.id+"                       ";
-    c=c+props.dataOne.code+"                     ";
-    d=props.dataOne.address;
-    if(d!=="undefined" && props.dataOne.coordinates!=null){ 
-    d="address:                        "+d+"             ";
-    e=e+props.dataOne.coordinates.latitude+"                    ";
-    f=f+props.dataOne.coordinates.longitude;
+    a=a+props.dataOne.title+"                     ";
+    b=b+props.dataOne.description+"                       ";
+    c=c+props.dataOne.location+"                     ";
+    d=props.dataOne.wage;
+    for(let i=0; i<props.dataOne.requirements.length; i++)
+        e=e+props.dataOne.requirements[i]+", ";
+    for(let i=0; i<props.dataOne.additionalReqs.length; i++){
+        f=f+props.dataOne.reqs[i]+": "+props.dataOne.additionalReqs[i];
+    }
     return (
         <div>
             <p >
@@ -25,18 +26,8 @@ const ViewBuilding = (props) => {
             </p>
         </div>
     );
-    }
-    else{
-        return (
-            <div>
-                <p >
-                   
-                   {b}<br></br> <br></br>{a}<br></br>{c}
-                </p>
-            </div>
-        );
 
-    }
+
     }
     else{
         return(

@@ -1,11 +1,26 @@
 import io
 import os
 import requests
-import psycopg2
+import pymongo
 
 from flask import Flask, request, jsonify
 
+# app initialization
 app = Flask(__name__)
+
+# db connection
+myclient = pymongo.MongoClient("mongodb://localhost:27017/")
+mydb = myclient["testdb"]
+joblisting = mydb["job"]
+
+# dummy tests
+job1 = {
+    "title": "",
+    "description": "", 
+    "location": "",
+    "wage": "", 
+    "requirements": ""
+}
 
 @app.route('/retrieve', methods = ['GET'])
 def retrieve():

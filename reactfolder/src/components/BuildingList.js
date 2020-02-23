@@ -15,8 +15,8 @@ const BuildingList = (props) => {
         return (                
            
             <tr key={directory.id} onClick={handleClick} >
-                <td>{directory.code} </td>
-                <td > {directory.name} </td>
+                <td>{directory.title} </td>
+                <td > {directory.description} </td>
             </tr> 
             
         

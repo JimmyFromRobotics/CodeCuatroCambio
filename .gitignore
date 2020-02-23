@@ -1,3 +1,4 @@
 .vscode/
 flaskfolder/__pycache__/
 /venv/
+/dbstuff/mongo/

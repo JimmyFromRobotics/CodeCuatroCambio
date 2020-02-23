@@ -6,12 +6,15 @@ import RemoveBuilding from './components/RemoveBuilding';
 import AddBuilding from './components/AddBuilding';
 import Credit from './components/Credit';
 import { render } from '@testing-library/react';
+import data from './data/data';
 let title="";
 let description="";
 let location="";
 let wage="";
-let requirements="";
+let requirements=[];
 let idCount=0;
+let additionalReqs=[];
+let reqs=[];
 const App = (props) => {
     const [filterText, setFilterText] = useState('');
     const [selectedBuilding, setSelectedBuilding] = useState(0);
@@ -32,21 +35,20 @@ const App = (props) => {
 
     const addTo=()=>{
         idCount++;
-        if(code!=='undefined'){
+        if(title!=='undefined'){
         let b=false;
         let k;
         for(let i=0; i<props.data.length; i++)
-            if(props.data[i].code.localeCompare(code)>0){
+            if(props.data[i].title.localeCompare(title)>0){
                 b=true;
                 props.data.splice(i, 0, {
                     id:idCount,
-                    name: name, 
-                    code:code,
-                    coordinates:{
-                        latitude: lat, 
-                        longitude:lon
-                    },
-                    address:adde
+                    requirements:requirements,
+                    title: title, 
+                    description:description,
+                    additionalReqs:additionalReqs,
+                    location:location, 
+                    wage:wage
                 });
                 k=i;
                 break;
@@ -54,14 +56,14 @@ const App = (props) => {
             if(!b){
             props.data.push({
                 id:idCount,
-                name: name, 
-                code:code,
-                coordinates:{
-                    latitude: lat, 
-                    longitude:lon
-                },
-                address:adde
+                    title: title, 
+                    requirements:requirements,
+                    description:description,
+                    additionalReqs:additionalReqs,
+                    location:location, 
+                    wage:wage
             });
+            data.len=props.data;
             k=props.data.length-1;
         }
         /*
@@ -83,27 +85,46 @@ const App = (props) => {
 };
 
     const func = (nae) => {
-        name=nae;
+        title=nae;
     };
     const func2 = (nae) => {
-        code=nae;
+        description=nae;
     };
 
     const func3 = (nae) => {
-        adde=nae;
+        location=nae;
 
     };
     const func4 = (nae) => {
-        lon=nae;
+        wage=nae;
 
     };
 
     const func5 = (nae) => {
-        lat=nae;
-
+        while(nae.indexOf(",")>-1){
+            requirements.push(nae.substring(0, nae.indexOf(",")));
+            nae=nae.indexOf(",")+1;
+        }
+        if(nae.length>=1)
+            requirements.push(nae);
     };
 
 
+    const func6 = (nae) => {
+        while(nae.indexOf(",")>-1){
+            reqs.push(nae.substring(0, nae.indexOf(":")));
+            nae=nae.indexOf(":")+1;
+            additionalReqs.push(nae.substring(0, nae.indexOf(",")));
+            nae=nae.indexOf(",")+1;
+        }
+        if(nae.length>=1){
+            reqs.push(nae.substring(0, nae.indexOf(":")));
+            nae=nae.indexOf(":")+1;
+            additionalReqs.push(nae.substring(nae));
+        }
+    };
+
+/*
     const fun = () => {
         console.log(10);
         let arr=props.data;
@@ -115,10 +136,10 @@ const App = (props) => {
         });
     };
 
-
+*/
     const getResultsOfFilter = () => {
 
-        return list.filter(directory => directory.name.includes(filterText))
+        return list.filter(directory => directory.title.includes(filterText))
 
 
     };
@@ -146,7 +167,7 @@ const App = (props) => {
             p=i;
       return  p;
         };
-
+/*
         const add=()=>{
             console.log(list.length);
             let p=0;
@@ -155,7 +176,7 @@ const App = (props) => {
                 p=i;
           return  p;
             };
-
+*/
     const deleteListing = () => {
         
     };
@@ -167,7 +188,7 @@ const App = (props) => {
        
         <div className="bg">
             <div className="row">
-                <h1>UF Directory App</h1>
+                <h1>Jobs</h1>
             </div>
       
                 
@@ -205,11 +226,14 @@ const App = (props) => {
                         dataOne={getId()} 
                         />  
                         <button  onClick={()=>updateList(getNotThisOne(props.data.splice(remove(), 1)))}>remove</button>
-            <input type="text" placeholder="Enter name of added Building" onChange={(e)=>func(e.target.value)}></input>
-            <input type="text" placeholder="Enter code of added Building"onChange={(e)=>func2(e.target.value)}></input>
-            <input type="text" placeholder="Enter address of added Building"onChange={(e)=>func3(e.target.value)}></input>
-            <input type="text" placeholder="Enter latitude of added Building"onChange={(e)=>func5(e.target.value)}></input>
-            <input type="text" placeholder="Enter longitude of added Building"onChange={(e)=>func4(e.target.value)}></input>
+            <input type="text" placeholder="Enter title of job" onChange={(e)=>func(e.target.value)}></input>
+            <input type="text" placeholder="Enter description of job"onChange={(e)=>func2(e.target.value)}></input>
+            <input type="text" placeholder="Enter location of job"onChange={(e)=>func3(e.target.value)}></input>
+            <input type="text" placeholder="Enter wage of job"onChange={(e)=>func5(e.target.value)}></input>
+            <input type="text" placeholder="Enter requirements of job (separated by commas and a space)"onChange={(e)=>func4(e.target.value)}></input>
+            <input type="text" placeholder="Enter requirements of job (separated by commas and a space)"onChange={(e)=>func4(e.target.value)}></input>
+            <input type="text" placeholder="Enter additional reqs (separated by commas and a space)"onChange={(e)=>func4(e.target.value)}></input>
+
             <button onClick={()=>updateList(addTo())}>Add Building</button>
 
         
