@@ -66,7 +66,7 @@ const App3 = (props) => {
             });
             data.len=props.data;
             k=props.data.length-1;
-            axios.post('http://localhost:5000', props.data[k])
+            axios.post('http://localhost:5000', JSON.stringify(props.data[k]))
             .then((res) => {
                 console.log(res.data)
             }).catch((error) => {
@@ -163,7 +163,7 @@ const App3 = (props) => {
         for(let i=0; i<props.data.length; i++)
         if(props.data[i]!==val)
         arr.push(props.data[i]);
-        axios.post('http://localhost:5000/users')
+        axios.post('http://localhost:5000/users', JSON.stringify(props.data))
         .then(res => {
             this.setState(props.data);
         })
