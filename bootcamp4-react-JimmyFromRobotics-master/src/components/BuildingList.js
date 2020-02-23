@@ -6,6 +6,13 @@ const BuildingList = (props) => {
  
     //console.log('This is my directory file', this.props.data);
     const buildingList = props.data.map(directory => {
+        axios.get('http://localhost:5000/users')
+        .then(res => {
+            this.setState(props.data);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
         function handleClick() {
             props.data3(directory);
         }
@@ -14,9 +21,9 @@ const BuildingList = (props) => {
 
         return (                
            
-            <tr key={directory.id} onClick={handleClick} >
-                <td>{directory.title} </td>
-                <td > {directory.description} </td>
+            <tr key={directory.title} onClick={handleClick} >
+                <td>{directory.description} </td>
+                <td > {directory.location} </td>
             </tr> 
             
         

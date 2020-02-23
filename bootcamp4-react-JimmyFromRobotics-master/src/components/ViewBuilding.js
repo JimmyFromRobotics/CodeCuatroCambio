@@ -1,6 +1,7 @@
 import React from 'react';
 
 const ViewBuilding = (props) => {
+    
     let a="title: ";
     let b="description: ";
     let c="location: ";
@@ -14,10 +15,15 @@ const ViewBuilding = (props) => {
     c=c+props.dataOne.location+"                     ";
     d=props.dataOne.wage;
     for(let i=0; i<props.dataOne.requirements.length; i++)
+    if(i!==props.dataOne.requirements.length-1)
         e=e+props.dataOne.requirements[i]+", ";
-    for(let i=0; i<props.dataOne.additionalReqs.length; i++){
-        f=f+props.dataOne.reqs[i]+": "+props.dataOne.additionalReqs[i];
+        else
+        e=e+props.dataOne.requirements[i];
+        console.log(props.dataOne.additionalReqs[1]);
+    for(let i=0; i<props.dataOne.additionalReqs.length-1; i+=2){
+        f=f+props.dataOne.additionalReqs[i]+": "+props.dataOne.additionalReqs[i+1]+", ";
     }
+    f=f.substring(0, f.length-2);
     return (
         <div>
             <p >
@@ -33,9 +39,9 @@ const ViewBuilding = (props) => {
         return(
         <div>
             <p >
-                <i>Click on a name to view more information <br></br><br></br></i>
-                <i>Clicking on a building and then remove will remove the building (also it will default to most recent building put in if applicable, else the first element)</i>
-                <i><br></br><br></br>Filling in fields and clicking Add Building will add a building with the specified fields</i>
+                <i>Click on a job to view more information <br></br><br></br></i>
+                <i>Clicking on a job and then remove will remove the job (also it will default to most recent job put in if applicable, else the first element)</i>
+                <i><br></br><br></br>Filling in fields and clicking Add Job will add a building with the specified fields</i>
             </p>
         </div>
         );
